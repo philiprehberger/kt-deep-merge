@@ -2,12 +2,9 @@
 
 [![CI](https://github.com/philiprehberger/kt-deep-merge/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-deep-merge/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/deep-merge)](https://central.sonatype.com/artifact/com.philiprehberger/deep-merge)
+[![License](https://img.shields.io/github/license/philiprehberger/kt-deep-merge)](LICENSE)
 
 Deep merge maps with configurable conflict resolution.
-
-## Requirements
-
-- Kotlin 1.9+ / Java 17+
 
 ## Installation
 
@@ -15,7 +12,7 @@ Deep merge maps with configurable conflict resolution.
 
 ```kotlin
 dependencies {
-    implementation("com.philiprehberger:deep-merge:0.1.0")
+    implementation("com.philiprehberger:deep-merge:0.1.2")
 }
 ```
 
@@ -25,7 +22,7 @@ dependencies {
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>deep-merge</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.2</version>
 </dependency>
 ```
 
