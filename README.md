@@ -1,6 +1,6 @@
 # deep-merge
 
-[![CI](https://github.com/philiprehberger/kt-deep-merge/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-deep-merge/actions/workflows/publish.yml)
+[![Tests](https://github.com/philiprehberger/kt-deep-merge/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-deep-merge/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/deep-merge)](https://central.sonatype.com/artifact/com.philiprehberger/deep-merge)
 [![License](https://img.shields.io/github/license/philiprehberger/kt-deep-merge)](LICENSE)
 
@@ -11,9 +11,7 @@ Deep merge maps with configurable conflict resolution.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-dependencies {
-    implementation("com.philiprehberger:deep-merge:0.1.2")
-}
+implementation("com.philiprehberger:deep-merge:0.1.3")
 ```
 
 ### Maven
@@ -22,7 +20,7 @@ dependencies {
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>deep-merge</artifactId>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
 </dependency>
 ```
 
