@@ -36,4 +36,44 @@ class DeepMergeTest {
         assertEquals(1, m["a"]); assertEquals(2, m["b"]); assertEquals(3, m["c"])
     }
     @Test fun `empty`() = assertEquals(emptyMap(), deepMerge(emptyMap(), emptyMap()))
+
+    // diff tests
+    @Test fun `diff identical maps`() {
+        val a = mapOf("a" to 1, "b" to 2)
+        assertEquals(emptyMap(), diff(a, a))
+    }
+    @Test fun `diff changed value`() {
+        val a = mapOf("a" to 1, "b" to 2)
+        val b = mapOf("a" to 1, "b" to 99)
+        assertEquals(mapOf("b" to 99), diff(a, b))
+    }
+    @Test fun `diff added key`() {
+        val a = mapOf("a" to 1)
+        val b = mapOf("a" to 1, "b" to 2)
+        assertEquals(mapOf("b" to 2), diff(a, b))
+    }
+    @Test fun `diff removed key not included`() {
+        val a = mapOf("a" to 1, "b" to 2)
+        val b = mapOf("a" to 1)
+        assertEquals(emptyMap(), diff(a, b))
+    }
+    @Test fun `diff nested maps`() {
+        val a = mapOf("x" to mapOf("a" to 1, "b" to 2))
+        val b = mapOf("x" to mapOf("a" to 1, "b" to 3, "c" to 4))
+        val expected = mapOf("x" to mapOf("b" to 3, "c" to 4))
+        assertEquals(expected, diff(a, b))
+    }
+    @Test fun `diff nested no change`() {
+        val a = mapOf("x" to mapOf("a" to 1))
+        val b = mapOf("x" to mapOf("a" to 1))
+        assertEquals(emptyMap(), diff(a, b))
+    }
+    @Test fun `diff null values`() {
+        val a = mapOf<String, Any?>("a" to 1)
+        val b = mapOf<String, Any?>("a" to null)
+        assertEquals(mapOf<String, Any?>("a" to null), diff(a, b))
+    }
+    @Test fun `diff empty maps`() {
+        assertEquals(emptyMap(), diff(emptyMap(), emptyMap()))
+    }
 }
