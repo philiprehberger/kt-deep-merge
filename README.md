@@ -11,7 +11,7 @@ Deep merge maps with configurable conflict resolution.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("com.philiprehberger:deep-merge:0.1.3")
+implementation("com.philiprehberger:deep-merge:0.2.0")
 ```
 
 ### Maven
@@ -20,7 +20,7 @@ implementation("com.philiprehberger:deep-merge:0.1.3")
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>deep-merge</artifactId>
-    <version>0.1.3</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -41,6 +41,13 @@ deepMerge(a, b) {
     onListConflict = ListMerge.APPEND
     onNull = NullHandling.SKIP
 }
+
+// Diff two maps — returns only changed/added keys
+val original = mapOf("db" to mapOf("host" to "localhost", "port" to 5432))
+val modified = mapOf("db" to mapOf("host" to "db.prod.example.com", "port" to 5432))
+
+val changes = diff(original, modified)
+// {"db": {"host": "db.prod.example.com"}}
 ```
 
 ## API
@@ -48,6 +55,7 @@ deepMerge(a, b) {
 | Function / Class | Description |
 |------------------|-------------|
 | `deepMerge(vararg maps, config)` | Deep merge maps with configurable strategies |
+| `diff(original, modified)` | Returns only keys/values that differ between two maps (deep comparison) |
 | `MergeStrategy` | Conflict resolution: LAST_WINS, FIRST_WINS, THROW |
 | `ListMerge` | List merging: REPLACE, APPEND, UNION |
 | `NullHandling` | Null values: KEEP or SKIP |

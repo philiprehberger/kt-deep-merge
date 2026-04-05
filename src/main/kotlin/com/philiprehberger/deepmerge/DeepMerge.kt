@@ -10,6 +10,32 @@ public fun deepMerge(vararg maps: Map<String, Any?>, config: MergeConfig.() -> U
     return maps.fold(emptyMap()) { acc, map -> mergeTwo(acc, map, cfg, "") }
 }
 
+/**
+ * Returns only the keys/values in [modified] that differ from [original] (deep comparison).
+ * Nested maps are compared recursively — the result preserves structure for nested diffs.
+ * Keys present in [original] but absent in [modified] are not included.
+ */
+@Suppress("UNCHECKED_CAST")
+public fun diff(original: Map<String, Any?>, modified: Map<String, Any?>): Map<String, Any?> {
+    val result = mutableMapOf<String, Any?>()
+    for ((key, modifiedVal) in modified) {
+        if (!original.containsKey(key)) {
+            result[key] = modifiedVal
+            continue
+        }
+        val originalVal = original[key]
+        if (originalVal is Map<*, *> && modifiedVal is Map<*, *>) {
+            val nested = diff(originalVal as Map<String, Any?>, modifiedVal as Map<String, Any?>)
+            if (nested.isNotEmpty()) {
+                result[key] = nested
+            }
+        } else if (originalVal != modifiedVal) {
+            result[key] = modifiedVal
+        }
+    }
+    return result
+}
+
 @Suppress("UNCHECKED_CAST")
 private fun mergeTwo(left: Map<String, Any?>, right: Map<String, Any?>, cfg: MergeConfig, path: String): Map<String, Any?> {
     val result = left.toMutableMap()
